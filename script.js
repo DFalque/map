@@ -1,6 +1,6 @@
 ////////////////////// MAP CONFIGURATION //////////////////////
 
-mapboxgl.accessToken =
+/*mapboxgl.accessToken =
   "pk.eyJ1IjoiZGYxMyIsImEiOiJjazR6dTM5cWkwZHU1M3JtNTVidzl3a2FlIn0.7Q4-VQ--zVEiXYJvPNK_9g";
 
 var map = new mapboxgl.Map({
@@ -8,7 +8,7 @@ var map = new mapboxgl.Map({
   style: "mapbox://styles/df13/ck1rlsmwq02zq1cnqquawed30",
   center: [150.180318, -34.605543],
   zoom: 0.2,
-  minZoom: 1
+  minZoom: 1,
 });
 
 // Render map copies
@@ -39,7 +39,7 @@ function AddToMap(sentarray) {
 // FUNCTION TO REMOVE THE MARKERS TO MAP
 
 function RemoveFromMap(sentarray) {
-  //console.log(sentarray[0]);
+  console.log(sentarray[0]);
   //sentarray[0].remove();
   //console.log("Remove From Map()"+sentarray.length);
   for (i = 0; i < sentarray.length; i++) {
@@ -51,11 +51,11 @@ function RemoveFromMap(sentarray) {
 
 // CONTINENTS
 
-map.on("load", function() {
-  $.getJSON("data/continents.json", function(data) {
-    data.features.forEach(function(feature) {
+map.on("load", function () {
+  $.getJSON("data/continents.json", function (data) {
+    data.features.forEach(function (feature) {
       var el = document.createElement("div");
-      el.className = "marker";
+      el.className = "marker marker-continent";
       el.style.backgroundImage = "url(" + feature.properties.icon + ")";
       el.style.backgroundSize = "cover";
       el.style.backgroundPosition = "center";
@@ -70,8 +70,8 @@ map.on("load", function() {
     });
   });
 
-  $.getJSON("data/zone_continents.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/zone_continents.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -91,8 +91,8 @@ map.on("load", function() {
     AddToMap(continentsMarkers);
   });
 
-  $.getJSON("data/countries.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/countries.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -111,8 +111,8 @@ map.on("load", function() {
     });
   });
 
-  $.getJSON("data/zone_country.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/zone_country.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -131,8 +131,8 @@ map.on("load", function() {
     });
   });
 
-  $.getJSON("data/region_country.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/region_country.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -151,8 +151,8 @@ map.on("load", function() {
     });
   });
 
-  $.getJSON("data/zone_region.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/zone_region.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -173,8 +173,8 @@ map.on("load", function() {
 
   // CITIES
 
-  $.getJSON("data/cities.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/cities.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -193,8 +193,8 @@ map.on("load", function() {
     });
   });
 
-  $.getJSON("data/places.json", function(data) {
-    data.features.forEach(function(feature) {
+  $.getJSON("data/places.json", function (data) {
+    data.features.forEach(function (feature) {
       console.log(feature);
       var el = document.createElement("div");
       el.className = "marker";
@@ -218,16 +218,16 @@ map.on("load", function() {
   ////////////////////////
 
   // Change the cursor to a pointer when the mouse is over the places layer.
-  map.on("mouseenter", "continents", function() {
+  map.on("mouseenter", "continents", function () {
     map.getCanvas().style.cursor = "pointer";
   });
 
   // Change it back to a pointer when it leaves.
-  map.on("mouseleave", "continents", function() {
+  map.on("mouseleave", "continents", function () {
     map.getCanvas().style.cursor = "";
   });
 
-  map.on("click", function(e) {
+  map.on("click", function (e) {
     if (e.defaultPrevented === false) {
       $("#sidebar").removeClass("visible");
       $("#map").removeClass("shorten");
@@ -238,7 +238,7 @@ map.on("load", function() {
   AddToMap(continentsMarkers);
 
   // ZOOM
-  map.on("zoom", function() {
+  map.on("zoom", function () {
     switch (true) {
       // CONTINENTS
       case map.getZoom() <= 2.1:
@@ -375,7 +375,7 @@ map.on("load", function() {
         AddToMap(regionMarkers);
 
         // click event on the icon
-        map.on("click", "region_country", function(e) {
+        map.on("click", "region_country", function (e) {
           if (e.features[0].properties.title) {
             console.log(e.features[0].properties.title);
             var title = e.features[0].properties.title;
@@ -391,16 +391,16 @@ map.on("load", function() {
         // end click event on the icon
 
         // Change the cursor to a pointer when the mouse is over the places layer.
-        map.on("mouseenter", "region_country", function() {
+        map.on("mouseenter", "region_country", function () {
           map.getCanvas().style.cursor = "pointer";
         });
 
         // Change it back to a pointer when it leaves.
-        map.on("mouseleave", "region_country", function() {
+        map.on("mouseleave", "region_country", function () {
           map.getCanvas().style.cursor = "";
         });
 
-        map.on("click", function(e) {
+        map.on("click", function (e) {
           if (e.defaultPrevented === false) {
             $("#sidebar").removeClass("visible");
             $("#map").removeClass("shorten");
@@ -477,4 +477,4 @@ map.on("load", function() {
         break;
     }
   });
-});
+}); */

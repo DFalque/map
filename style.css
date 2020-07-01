@@ -4,17 +4,19 @@ body {
 }
 
 #sidebar {
-    width: 20%;
+    width: 100%;
     background: white;
     position: absolute;
-    height: 100%;
-    top: 0;
-    left: 20%;
+    height: 0%;
+    overflow: auto;
+    bottom: 0%;
+    z-index: 3;
+    transition: height 0.7s ease;
 }
 
 #sidebar.visible {
-    left: 0px;
-    transition: left 0.7s ease;
+    /* left: 0px; */
+    height: 40%;
 }
 
 #map {
@@ -27,11 +29,10 @@ body {
 
 #map.shorten {
     position: absolute;
-    left: 20%;
+    /* left: 20%; */
     top: 0;
     bottom: 0;
-    width: 80%;
-    transition: left 0.7s ease;
+    width: 100%;
 }
 
 .marker {
@@ -40,12 +41,12 @@ body {
     border-radius: 50%;
     cursor: pointer;
     padding: 0;
+    opacity: 1;
     /*-webkit-animation: fadeInFromNone 0.5s ;
     -moz-animation: fadeInFromNone 0.5s;
     -o-animation: fadeInFromNone 0.5s;
     animation: fadeInFromNone 0.5s;*/
-
-
+    transition: opacity 0.5s;
 }
 
 .marker-city {
@@ -54,6 +55,20 @@ body {
     border-radius: 50%;
     cursor: pointer;
     padding: 0;
+}
+
+.marker-fade-in {
+    opacity: 0;
+}
+
+.marker-active {
+    border-color: #ffc219d7;
+    background-color: #ffc3197d;
+    animation-name: pulseAnimation;
+    animation-timing-function: linear;
+    animation-duration: 1.5s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes fadeInFromNone {
@@ -121,5 +136,125 @@ body {
     100% {
         display: block;
         opacity: 1;
+    }
+}
+
+/* Marker animations */
+@keyframes pulseAnimation {
+    0% {
+        /* transform: scale(1); */
+        width: 40px;
+        height: 40px;
+    }
+
+    25% {
+        /* transform: scale(1.2); */
+        width: 50px;
+        height: 50px;
+    }
+
+    50% {
+        /* transform: scale(1.4); */
+        width: 60px;
+        height: 60px;
+    }
+
+    75% {
+        /* transform: scale(1.2); */
+        width: 50px;
+        height: 50px;
+    }
+
+    100% {
+        /* transform: scale(1); */
+        width: 40px;
+        width: 40px;
+    }
+}
+
+/* My styles */
+.form-control {
+    top: 2%;
+    right: 3%;
+    width: 80vw;
+    padding: 0.1em 0.3em;
+    border-radius: 1em;
+    z-index: 800;
+    border: 2px;
+    border-color: #dddddd;
+}
+
+.result {
+    top: 7%;
+    right: 3%;
+    width: 80vw;
+    padding: 0.1em;
+    border-radius: 1em;
+    z-index: 800;
+}
+
+.mapboxgl-ctrl-geocoder {
+    position: absolute !important;
+    width: 80% !important;
+}
+
+.result li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.result li:hover {
+    background-color: #dddddd;
+}
+
+.d-none {
+    display: none;
+}
+
+.close {
+    position: absolute;
+    top: 2px;
+    font-size: 2.5em;
+    font-weight: 400;
+    right: 2px;
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.img-description {
+    height: 30%;
+    width: 100%;
+}
+
+
+@media(min-width:50em) {
+    #map.shorten {
+        position: absolute;
+        left: 20%;
+        top: 0;
+        bottom: 0;
+        width: 80%;
+        transition: left 0.7s ease;
+    }
+
+    #sidebar {
+        background: white;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0%;
+        width: 0%;
+        overflow: hidden;
+    }
+
+    #sidebar.visible {
+        width: 20%;
+        transition: width 1.0s ease;
     }
 }
